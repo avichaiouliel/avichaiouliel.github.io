@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Avichai Ouliel, Product & Operations. Case studies: Shabatzak shift scheduling, the Zaqi AI agent, and an Event Gemach inventory app.">
+<meta property="og:title" content="Avichai Ouliel · Portfolio">
+<meta property="og:description" content="Products I built to replace manual processes.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%234468e8'/%3E%3Ctext x='32' y='41' font-family='Arial' font-size='26' font-weight='700' fill='white' text-anchor='middle'%3EAO%3C/text%3E%3C/svg%3E">
+<title>Avichai Ouliel Portfolio</title>
+<style>
+/* Layout: mirrors the reference — fixed dark sidebar, light canvas, page-header, KPI row, two-column card grid. Single light look by design. */
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f5f7fb;color-scheme:light;font-synthesis:none;
+  --blue:#3159d9;--blue-dark:#2446b6;--blue-soft:#edf2ff;--ink:#172033;--muted:#667085;--line:#e5e9f0;--surface:#ffffff;--canvas:#f5f7fb;--side:#101828;
+  --shadow:0 2px 8px rgba(16,24,40,.04),0 1px 2px rgba(16,24,40,.03)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--canvas);color:var(--ink)}
+button{font:inherit}
+a{color:inherit;text-decoration:none}
+.icon{width:19px;height:19px;flex:0 0 auto}
+.sidebar{position:fixed;inset:0 auto 0 0;width:244px;padding:30px 18px 22px;padding-left:max(18px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;background:var(--side);color:#fff;z-index:10;overflow-y:auto}
+.brand-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:11px;background:#4468e8;font-size:14px;font-weight:700;letter-spacing:.02em}
+.brand-copy{margin-top:14px;display:flex;flex-direction:column;gap:2px}
+.brand-copy strong{font-size:15px}
+.brand-copy span{color:#98a2b3;font-size:13px}
+.sidebar nav{display:flex;flex-direction:column;gap:6px;margin-top:42px}
+.sidebar nav button{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:8px;color:#aeb7c7;font-size:14px;font-weight:500;transition:.16s ease}
+.sidebar nav button:hover{background:#ffffff0e;color:#fff}
+.sidebar nav button:focus-visible{outline:2px solid #7393ff}
+.sidebar nav button.active{background:#25345e;color:#fff;box-shadow:inset 3px 0 #7393ff}
+.side-bottom{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding-top:24px}
+.sidebar-principle{padding:16px;display:flex;flex-direction:column;gap:5px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:#ffffff09}
+.sidebar-principle span{color:#98a2b3;font-size:10px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
+.sidebar-principle strong{font-size:12px;font-weight:500;color:#d7ddeb}
+.sidebar-principle .sel{user-select:all;word-break:break-all}
+.sidebar-principle a{font-size:12px;font-weight:600;color:#a9bcff}
+.demo-label{margin-top:4px;color:#7f8ba3;font-size:11px;text-align:center}
+.main{margin-left:244px;padding:38px 42px 64px;max-width:1240px;padding-right:max(42px,env(safe-area-inset-right,0px))}
+@media (max-width:900px){
+  .sidebar{position:static;width:auto;padding:20px max(16px,env(safe-area-inset-right,0px)) 18px max(16px,env(safe-area-inset-left,0px))}
+  .sidebar nav{flex-direction:row;flex-wrap:wrap;margin-top:18px}
+  .main{margin-left:0;padding:24px max(16px,env(safe-area-inset-right,0px)) 48px max(16px,env(safe-area-inset-left,0px))}
+}
+.page-header{min-height:92px;margin-bottom:26px;display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.page-header>div{min-width:0}
+.page-header h1{margin:4px 0 6px;font-size:30px;line-height:1.2;letter-spacing:-.035em}
+.page-header p{margin:0;color:var(--muted);font-size:14px;max-width:68ch;line-height:1.5}
+.eyebrow{color:var(--blue);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+.back-link{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;color:var(--blue);font-size:13px;font-weight:600;margin-bottom:10px}
+.back-link:focus-visible{outline:2px solid var(--blue)}
+.date-chip{padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:#475467;font-size:12px;font-weight:600;box-shadow:var(--shadow);white-space:nowrap}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;box-shadow:var(--shadow);min-width:0}
+.section-title{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:20px}
+.section-title h2{margin:0;font-size:16px;letter-spacing:-.015em}
+.section-title p{margin:5px 0 0;color:var(--muted);font-size:12px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+@media (max-width:1000px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{padding:18px 20px}
+.stat-top{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.045em}
+.stat-dot{width:8px;height:8px;border-radius:50%;background:#e79a31;box-shadow:0 0 0 4px #fff4e4;flex:0 0 auto}
+.stat-card>strong{display:block;margin:9px 0 4px;font-size:29px;letter-spacing:-.035em}
+.stat-card small{color:#8992a3;font-size:11px}
+.overview-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:18px;margin-bottom:18px}
+.insight-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-bottom:18px}
+@media (max-width:1000px){.overview-grid,.insight-grid{grid-template-columns:1fr}}
+.distribution-column{display:grid;gap:18px;align-content:start}
+.bar-list{display:flex;flex-direction:column;gap:10px}
+.bar-row{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:16px}
+.bar-label{font-size:12px}
+.bar-track{height:8px;border-radius:999px;background:#eef1f5;overflow:hidden}
+.bar-track span{display:block;height:100%;border-radius:inherit;background:#9eabc5}
+.bar-row.hi .bar-label{color:var(--blue);font-weight:700}
+.bar-row.hi .bar-track span{background:var(--blue)}
+.stacked{display:flex;overflow:hidden;height:12px;border-radius:999px;background:#eef1f5}
+.legend{margin-top:18px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 18px}
+.legend>div{display:grid;grid-template-columns:8px 1fr;align-items:center;gap:7px;font-size:11px}
+.legend-dot{width:7px;height:7px;border-radius:50%}
+.pain-card{padding-bottom:8px}
+.pain-list{margin:0 -22px}
+.pain-row{min-height:84px;padding:14px 22px;display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:14px;border-top:1px solid var(--line)}
+.pain-primary{background:#fbfcff}
+.rank{color:#9aa4b6;font-size:11px;font-weight:700}
+.pain-copy{min-width:0}
+.pain-copy>div{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pain-copy h3{margin:0;font-size:14px}
+.pain-copy p{margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+.review-label{display:block;margin-top:6px;color:#98a2b3;font-size:11px;text-align:center}
+@media (max-width:600px){.pain-row{grid-template-columns:30px 1fr}.pain-row>div:last-child{grid-column:2}}
+.badge{display:inline-flex;align-items:center;width:max-content;padding:4px 8px;border-radius:999px;background:#f1f3f6;color:#5e6879;font-size:10px;font-weight:700;white-space:nowrap}
+.badge-blue{background:var(--blue-soft);color:var(--blue-dark)}
+.badge-red{background:#fff0f0;color:#af4646}
+.badge-orange{background:#fff5e6;color:#9b651e}
+.badge-green{background:#eaf7ef;color:#30825a}
+.button{min-height:38px;padding:9px 14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;border:1px solid transparent;cursor:pointer;font-size:12px;font-weight:700;transition:.16s ease}
+.button-primary{background:var(--blue);color:#fff;box-shadow:0 2px 5px #3159d92e}
+.button-primary:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.button-secondary{background:#fff;color:#344054;border-color:#d9dee7}
+.button-secondary:hover{background:#f8f9fb}
+.button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.trace-strip{max-width:100%;width:max-content;margin-bottom:18px;padding:8px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:9px;border:1px solid #dce4fb;border-radius:8px;background:#f5f7ff;color:#586987;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.045em}
+.trace-strip i{font-style:normal;color:#94a0b4}
+.ai-summary{margin-bottom:18px;display:grid;grid-template-columns:310px 1fr;gap:20px;align-items:center;background:#fbfcff;border-color:#dce4fb}
+@media (max-width:800px){.ai-summary{grid-template-columns:1fr}}
+.ai-title{display:flex;gap:12px;align-items:center}
+.ai-title h2{margin:0 0 5px;font-size:16px}
+.ai-title p{margin:0;color:var(--muted);font-size:10px}
+.ai-mark{width:38px;height:38px;display:grid;place-items:center;border-radius:9px;background:var(--blue);color:#fff;font-size:12px;font-weight:700;flex:0 0 auto}
+blockquote{margin:0;padding-left:22px;border-left:2px solid #aabcf8;color:#35405a;font-size:15px;line-height:1.6}
+.steps{display:flex;flex-direction:column;gap:8px}
+.step{all:unset;cursor:pointer;display:grid;grid-template-columns:25px 1fr;gap:11px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fafbfc;font-size:12px;line-height:1.45}
+.step span{width:25px;height:25px;display:grid;place-items:center;border-radius:7px;background:#f1f3f6;color:#5e6879;font-size:11px;font-weight:700}
+.step.on{border-color:#c9d6fb;background:#f6f8ff}
+.step.on span{background:var(--blue);color:#fff}
+.step:focus-visible{outline:2px solid var(--blue)}
+.step b{display:block;font-size:13px}
+.step small{color:var(--muted)}
+.stage{margin-top:16px}
+.stage p.lead{margin:0 0 14px;color:#35405a;font-size:13px;line-height:1.55}
+.pattern-list{display:flex;flex-direction:column;gap:16px}
+.pattern-list>div{display:flex;align-items:center;gap:11px}
+.pattern-list>div>span{width:25px;height:25px;display:grid;place-items:center;border-radius:7px;background:var(--blue-soft);color:var(--blue);font-size:12px;font-weight:700;flex:0 0 auto}
+.pattern-list p{margin:0;font-size:12px}
+.evidence-preview{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:1100px){.evidence-preview{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.evidence-preview{grid-template-columns:1fr}}
+.quote-card{min-height:150px;padding:15px;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:9px;background:#fbfcfd}
+.quote-meta{display:flex;align-items:center;gap:6px}
+.quote-meta>span:first-child{margin-right:auto;color:var(--muted);font-size:10px;font-weight:700}
+.quote-card h4{margin:14px 0 6px;font-size:13px}
+.quote-card p{margin:0;font-size:12px;line-height:1.55;color:#475467}
+.table-card{padding:0;overflow-x:auto;border:1px solid var(--line);border-radius:9px}
+table{border-collapse:collapse;width:100%;min-width:520px}
+th{background:#f8f9fb;color:#768196;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+td{padding:11px 14px;border-bottom:1px solid #edf0f4;color:#273146;font-size:11px;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+td.slot{cursor:pointer}
+td.slot:hover{background:#f5f7ff}
+td.sel{box-shadow:inset 0 0 0 2px var(--blue)}
+.why-callout{margin-top:14px;padding:13px 16px;display:flex;align-items:flex-start;gap:12px;border:1px solid #dce4fb;border-radius:10px;background:#f6f8ff}
+.callout-icon{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#dfe7ff;color:var(--blue);font-weight:700;flex:0 0 auto}
+.why-callout strong{font-size:12px}
+.why-callout p,.why-callout ul{margin:3px 0 0;color:var(--muted);font-size:11px;line-height:1.55}
+.why-callout ul{padding-left:16px}
+.decision-footer{margin-top:18px;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;border:1px solid var(--line);border-radius:11px;background:#fff;box-shadow:var(--shadow)}
+.decision-footer p{margin:0;color:var(--muted);font-size:11px}
+.decision-footer>div:last-child{display:flex;gap:9px;flex-wrap:wrap}
+.toast{position:fixed;right:calc(28px + env(safe-area-inset-right,0px));bottom:calc(28px + env(safe-area-inset-bottom,0px));min-width:260px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid #cde4d7;border-radius:10px;background:#fff;box-shadow:0 16px 38px #1018282e;z-index:20}
+.toast>span{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;background:#eaf7ef;color:#30825a;font-weight:700}
+.toast strong{font-size:12px}
+.toast p{margin:3px 0 0;color:var(--muted);font-size:10px}
+.shot{border:1px solid var(--line);border-radius:10px;background:#f8f6f1;overflow-x:auto;box-shadow:var(--shadow)}
+.shot-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line);background:#fff;min-width:880px}
+.shot-bar i{width:9px;height:9px;border-radius:50%;background:#e2e5ea}
+.shot-bar span{margin-left:10px;color:var(--muted);font-size:11px;font-weight:600}
+.dboard{min-width:880px;padding:14px 16px 0;display:grid;grid-template-columns:96px 84px repeat(7,1fr);gap:6px;font-size:11px;color:#2a2a24}
+.dh{text-align:center;padding-bottom:4px}
+.dh b{display:block;font-size:13px}
+.dh small{color:#6b6b60}
+.band{border-radius:14px 0 0 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:10px 4px;text-align:center}
+.band b{font-size:16px}
+.band small{font-weight:600}
+.b-m{background:#efdcab}.b-e{background:#ecc1a0}.b-n{background:#262f4a;color:#fff}
+.lbl{background:#fffdf8;border:1px solid #ece6d8;border-radius:0 12px 12px 0;padding:8px 6px;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.lbl .t{padding:3px 9px;border-radius:99px;font-weight:700;font-size:11px}
+.t-post{background:#c3dbc3;color:#1d3a26}.t-brk{background:#d6e6fb;color:#1d3a6b;border:1px solid #a9c4ee}
+.t-res{background:#fff;border:1px solid #333;margin-top:auto}
+.lbl small{color:#6b6b60;font-size:10px;text-align:right}
+.cell{border:1px solid #ece6d8;border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:4px}
+.c-m{background:#fbf6ea}.c-m.we{background:#f4ebd4}
+.c-e{background:#fdf3ec}.c-e.we{background:#f8e3d6}
+.c-n{background:#eef1fb}.c-n.we{background:#dde3f5}
+.cell .ed{color:#8a8a7c;font-size:9px}
+.chip{border-radius:7px;padding:5px 4px;text-align:center;font-weight:600;background:#c3dbc3;color:#1d3a26}
+.chip.brk{background:#d6e6fb;border:1px solid #a9c4ee;color:#1d3a6b}
+.chip.flag{background:#f6dede;border:1px solid #c26a6a;color:#7a2a2a}
+.chip.res{background:#fff;border:1px solid #333;margin-top:auto}
+.chip.add{background:transparent;border:1px dashed #d7d0c0;color:#8a8a7c;font-weight:500}
+.gap{border-top:1px solid #ece6d8;margin:4px -6px;}
+.nobrk{color:#8a8a7c;text-align:center;padding:10px 0}
+.shot-foot{min-width:880px;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;margin-top:10px;background:#fff;border-top:1px solid var(--line);font-size:11px;font-weight:600}
+.shot-foot span:first-child{border:1px solid #d9dee7;border-radius:8px;padding:6px 10px}
+.req-list{min-width:640px;padding:6px 16px 14px;display:flex;flex-direction:column;gap:8px}
+.req{display:grid;grid-template-columns:120px 1fr 120px auto;gap:12px;align-items:center;background:#fff;border:1px solid #ece6d8;border-radius:10px;padding:10px 12px;font-size:12px}
+.req small{color:var(--muted)}
+.req .acts{display:flex;gap:6px}
+.req .acts span{border-radius:7px;padding:5px 10px;font-size:11px;font-weight:700;border:1px solid #d9dee7;background:#fff}
+.req .acts span.ok{background:#c3dbc3;border-color:#c3dbc3;color:#1d3a26}
+.shots{display:grid;gap:18px}
+.phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:1000px){.phones{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}}
+.phone{max-width:320px;width:100%;justify-self:center;border:8px solid #16202c;border-radius:28px;background:#f6f7f9;overflow:hidden;box-shadow:var(--shadow);font-size:11px;color:#16202c}
+.g-top{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 8px;background:#fff}
+.g-top b{color:#1d4ed8;font-size:13px}
+.g-top span{font-weight:700;font-size:12px}
+.g-tabs{display:flex;gap:4px;padding:0 10px 8px;background:#fff;border-bottom:1px solid #e3e6ea;overflow:hidden}
+.g-tabs span{padding:5px 8px;border-radius:7px;color:#5b6672;font-weight:500;font-size:10px;white-space:nowrap}
+.g-tabs span.on{background:#1d4ed8;color:#fff}
+.g-body{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:430px}
+.g-range{color:#5b6672;font-weight:600}
+.g-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.g-card{background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:9px;display:flex;flex-direction:column;gap:3px}
+.g-card small{color:#5b6672;font-size:10px}
+.g-card>b{font-size:17px}
+.g-card b.h{font-size:12px;margin-bottom:4px}
+.g-bar{display:flex;height:18px;border-radius:99px;overflow:hidden;border:1px solid #e3e6ea}
+.g-bar span{color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.g-leg{display:flex;align-items:center;gap:5px;margin-top:4px;color:#5b6672;font-size:10px}
+.g-leg i{width:8px;height:8px;border-radius:2px;margin-left:6px}
+.g-row{display:flex;justify-content:space-between;align-items:center;border:1px solid #e3e6ea;border-radius:9px;padding:7px 8px}
+.g-row div{display:flex;flex-direction:column}
+.g-row small{color:#5b6672;font-size:10px}
+.g-row span{font-weight:600}
+.g-actions{display:flex;gap:6px}
+.g-btn{background:#1d4ed8;color:#fff;border-radius:8px;padding:7px 10px;font-weight:700;text-align:center}
+.g-btn.sec{background:#fff;color:#16202c;border:1px solid #e3e6ea;font-weight:500}
+.g-btn.full{margin-top:auto}
+.g-btn.dis{background:#9db0e6}
+.g-search{background:#fff;border:1px solid #e3e6ea;border-radius:8px;padding:7px 9px;color:#8a949e}
+.g-item{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:center;background:#fff;border:1px solid #e3e6ea;border-radius:10px;padding:7px}
+.g-item i{width:30px;height:30px;border-radius:6px}
+.g-item div{display:flex;flex-direction:column;min-width:0}
+.g-item small{color:#5b6672;font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.g-item span{font-weight:700;font-size:13px}
+.hist small{font-variant-numeric:tabular-nums}
+.g-dates{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.g-dates b{font-size:13px!important}
+.g-line{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #e3e6ea;border-radius:10px;padding:8px}
+.g-line div{display:flex;flex-direction:column}
+.g-line small{font-size:10px;color:#0b6b57}
+.g-line.bad{border-color:#f1b8b2;background:#fef3f2}
+.g-line.bad small{color:#b42318}
+.g-line span{font-weight:700}
+.g-alert{background:#fef3f2;border:1px solid #f1b8b2;border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:2px;color:#b42318}
+.g-alert small{color:#7a271a;font-size:10px;line-height:1.4}
+.sub-top{min-width:760px;display:flex;justify-content:space-between;align-items:center;padding:12px 16px 4px;font-size:12px}
+.sub-top b{font-size:14px}
+.sub-top small{color:var(--muted)}
+.sub-grid{min-width:760px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px 16px 14px}
+.day{background:#fff;border:1px solid #ece6d8;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:12px}
+.day h5{margin:0;font-size:13px}
+.day h5 small{color:var(--muted);font-weight:500;margin-left:6px}
+.sh{display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.tile{all:unset;cursor:pointer;position:relative;text-align:center;padding:7px 2px;border:1px solid #e1ddd2;border-radius:8px;background:#fbfaf6;color:#5d5a50;font-size:11px;font-weight:500}
+.tile:focus-visible{outline:2px solid var(--blue)}
+.tile.on{border-color:#4f9a6b;background:#dcefe2;color:#1d3a26;font-weight:700}
+.tile.on::before{content:"✓";position:absolute;left:3px;top:2px;width:13px;height:13px;border-radius:50%;background:#30825a;color:#fff;font-size:8px;line-height:13px}
+.reason{display:flex;gap:6px}
+.reason span{flex:1;border:1px solid #e1ddd2;border-radius:7px;padding:5px 7px;font-size:10px;font-weight:500;color:#5d5a50;background:#fff}
+.leave{border:1px dashed #c26a6a;background:#fbefef;color:#7a2a2a;border-radius:8px;padding:12px;text-align:center;font-size:11px;font-weight:600}
+.sub-foot{min-width:760px;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:#fff;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+.sub-foot b{background:#30825a;color:#fff;border-radius:8px;padding:8px 14px;font-size:12px}
+.shot-cap{margin:10px 2px 0;color:var(--muted);font-size:11px}
+@media (prefers-reduced-motion:no-preference){.toast{animation:in .22s ease-out}}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand-mark">AO</div>
+  <div class="brand-copy"><strong>Avichai Ouliel</strong><span>Product &amp; Operations</span></div>
+  <nav id="nav" aria-label="Pages"></nav>
+  <div class="side-bottom">
+    <div class="sidebar-principle"><span>Working principle</span><strong>Map the process.</strong><strong>Automate the rules.</strong><strong>People decide.</strong></div>
+    <div class="sidebar-principle"><span>Contact</span><strong class="sel">avichai.ouliel@gmail.com</strong><strong class="sel">058-504-0600</strong><a href="https://www.linkedin.com/in/avichai-ouliel-b4a21926b" target="_blank" rel="noopener">LinkedIn profile ↗</a></div>
+    <div class="demo-label">Portfolio · Sample data</div>
+  </div>
+</aside>
+<main class="main" id="main"></main>
+<div id="toast"></div>
+
+<script>
+const IC={
+  grid:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+  cal:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+  spark:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>',
+  box:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/></svg>'
+};
+
+const P={
+ shabatzak:{
+  nav:"Shabatzak",icon:"cal",tag:"Scheduling",
+  title:"Shabatzak",
+  sub:"Weekly shift scheduling for a military company. Soldiers submit availability, an engine proposes a fair board, and the manager makes the final call.",
+  trace:["Soldier requests","Manager approval","Scheduling engine","Published board"],
+  problem:"The manager built the weekly roster by hand in Excel. Balancing requests, leave, rest rules and fairness for dozens of soldiers took about two days every week.",
+  moved:"Today the whole routine runs in Shabatzak. Leave requests, shift swaps, \"can't\" approvals and last-minute changes used to arrive by phone and chat and eat hours of the manager's week. Now each one is a request in the system, checked against the rules and approved in a tap, and the board updates for everyone.",
+  shots:true,
+  kpis:[["Soldiers","Dozens","Scheduled every week"],["Weekly effort","~1 hr","Down from about two days"],["Shift cap","5","Per soldier per week"],["Rule checks","3 layers","Engine, database and UI"]],
+  steps:[
+   ["Soldier submits","Available, prefers or can't, per shift",()=>`<p class="lead">Each soldier answers per shift. Leave days become hard blocks.</p>
+    <div class="table-card"><table><thead><tr><th>Day</th><th>Shift</th><th>Answer</th><th>Status</th></tr></thead><tbody>
+    <tr><td>Tue</td><td>Morning</td><td>Available</td><td><span class="badge">Counted</span></td></tr>
+    <tr><td>Tue</td><td>Evening</td><td>Prefers</td><td><span class="badge badge-blue">Preferred</span></td></tr>
+    <tr><td>Wed</td><td>Night</td><td>Can't</td><td><span class="badge badge-orange">Awaiting approval</span></td></tr>
+    <tr><td>Thu–Sat</td><td>All</td><td>Leave</td><td><span class="badge badge-red">Hard block</span></td></tr></tbody></table></div>`],
+   ["Manager approves","Every \"can't\" needs a ✓",()=>`<p class="lead">A "can't" counts only after the manager approves it, so nobody can block every night shift.</p>
+    <div class="table-card"><table><thead><tr><th>Soldier</th><th>Shift</th><th>Reason</th><th>Decision</th></tr></thead><tbody>
+    <tr><td>Daniel</td><td>Wed night</td><td>Medical appointment</td><td><span class="badge badge-orange">Pending</span></td></tr>
+    <tr><td>Noam</td><td>Fri evening</td><td>Family wedding</td><td><span class="badge badge-green">Approved</span></td></tr>
+    <tr><td>Itay</td><td>Every night</td><td>—</td><td><span class="badge badge-red">Declined</span></td></tr></tbody></table></div>`],
+   ["Engine proposes","A balanced board, with reasons",()=>board()],
+   ["Manager adjusts","Only rule-safe moves are offered",()=>`<p class="lead">Before each manual move, every soldier is checked against every seat. Only moves that break no rule are offered.</p>
+    <div class="table-card"><table><thead><tr><th>Proposed move</th><th>Result</th><th>Reason</th></tr></thead><tbody>
+    <tr><td>Itay → Thu morning</td><td><span class="badge badge-red">Blocked</span></td><td>Would be a 6th shift</td></tr>
+    <tr><td>Swap Ron ↔ Daniel, Fri</td><td><span class="badge badge-green">Allowed</span></td><td>Both available, both under the cap</td></tr>
+    <tr><td>Noam → Sat night</td><td><span class="badge badge-orange">Warning</span></td><td>Breaks the weekend rotation</td></tr></tbody></table></div>`]
+  ],
+  built:["Availability requests from the phone","Manager approval queue","Scheduling engine with fairness rules","Board editor with rule checks"],
+  decisions:[
+   ["Approval","\"Can't\" counts only after approval","Without it, soldiers blocked most nights and no valid board existed."],
+   ["Fairness","A weekend counts with two shifts","A single shift used to count as a full weekend and skewed the rotation."],
+   ["Fairness","Balance load, not just fill seats","The engine narrows the gap between the busiest and least busy soldier."],
+   ["Hard rule","Nobody ever gets six shifts","Enforced in the engine, database and UI. Manual edits can't bypass it."]
+  ]
+ },
+ zaqi:{
+  nav:"Zaqi",icon:"spark",tag:"AI agent",
+  title:"Zaqi",
+  sub:"A large AI product I have been building end to end: an agent that analyzes business data and turns it into answers people can act on. I shaped the product, built the agent, set up the knowledge it works from, and kept refining how it thinks.",
+  trace:["File library","Prompts","AI agent","Analysis"],
+  problem:"The answers a business needs are often buried in files and data nobody has time to go through. Zaqi lets people ask in plain language and get an analysis grounded in their own data.",
+  confidential:"Zaqi is an active, commercially sensitive project, so screenshots and implementation details stay private. I'm glad to walk through the product, the decisions behind it and what I learned in a conversation.",
+  kpis:[["Built","AI agent","Analyzes business data"],["Set up","File library","The agent's knowledge"],["Wrote","Prompts","Created and refined"],["Role","End to end","Product to rollout"]],
+  steps:[["Collect the knowledge","A library of the files the agent works from"],["Shape the thinking","Prompts written, tested and refined"],["Analyze","The agent reads the data and answers"],["Improve","Each round of feedback sharpens the next version"]],
+  built:["AI agent that analyzes data","File library for its sources","Prompts, created and refined over many versions"],
+  decisions:[
+   ["Grounding","Answers come from a curated library","The agent works from sources the team chose, not from guesses."],
+   ["Quality","Prompts evolve through testing","Each change was checked on real questions before it replaced the last one."],
+   ["Focus","Start with one clear job","Data analysis first, before adding more abilities."],
+   ["Ownership","People stay in charge","The agent suggests. People decide."]
+  ]
+ },
+ gemach:{
+  nav:"Event Gemach",icon:"box",tag:"Operations",
+  title:"Event Gemach",
+  sub:"A community gemach that lends tablecloths, tables and other event equipment. Inventory and reservations were run by hand. We made them automatic and controlled, in a mobile-first app for the small team that runs it.",
+  trace:["Inventory","Reservation","Availability check","Calendar"],
+  problem:"Inventory lived in notebooks and spreadsheets, and reservations came in by phone. Items were promised twice for the same dates, and nobody had a clear count of what was in stock.",
+  shots:"gemach",
+  kpis:[["Double bookings","Prevented","Checked per date range"],["Inventory","Live","Quantities with full history"],["Onboarding","Excel import","Existing lists moved in"],["Access","By role","Enforced in the database"]],
+  steps:[["Inventory","Items, variants, photos and quantities"],["Reservation","Borrower, items and dates"],["Availability","Checked against overlapping reservations"],["Calendar","Every reservation, month by month"]],
+  built:["Inventory with variants, photos and stock history","Excel import for the existing lists","Reservations with date-range availability","Month calendar and operations dashboard"],
+  decisions:[
+   ["Control","Stock is counted by date range","An item is free only if no overlapping reservation holds it. The check runs in one transaction, so two volunteers can't book the same item at once."],
+   ["Accountability","Every quantity change is recorded","Stock history shows who changed what and when."],
+   ["Adoption","Start from the existing Excel","Importing the current lists meant the team didn't retype anything."],
+   ["Security","Roles enforced in the database","Row-level security decides what each person can see and change."]
+  ]
+ }
+};
+const ORDER=["shabatzak","zaqi","gemach"];
+let view="overview",step=0,sel=null;
+
+const DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const ROWS=[["Itay",["M","","N","","M","",""]],["Ron",["","E","","M","","E","M"]],["Daniel",["N","","","E","","",""]],["Noam",["","M","E","","N","",""]]];
+const SH={M:"Morning",E:"Evening",N:"Night"};
+const count=r=>r[1].filter(Boolean).length;
+function board(){
+  return `<p class="lead">Click any shift to see why that soldier got it.</p>
+  <div class="table-card"><table><thead><tr><th>Soldier</th>${DAYS.map(d=>`<th>${d}</th>`).join("")}<th>Total</th></tr></thead><tbody>${
+   ROWS.map((r,i)=>`<tr><td><b>${r[0]}</b></td>${r[1].map((c,j)=>c?`<td class="slot${sel&&sel[0]===i&&sel[1]===j?" sel":""}" data-i="${i}" data-j="${j}" tabindex="0"><span class="badge ${c==="N"?"badge-orange":"badge-blue"}">${SH[c]}</span></td>`:`<td></td>`).join("")}<td><b>${count(r)}</b> / 5</td></tr>`).join("")
+  }</tbody></table></div>
+  <div class="why-callout"><span class="callout-icon">?</span><div>${sel?explain():`<strong>Why this shift?</strong><p>Pick a shift in the board to see the reasoning.</p>`}</div></div>`;
+}
+function explain(){
+  const [i,j]=sel,r=ROWS[i],c=r[1][j],n=count(r);
+  return `<strong>${r[0]} · ${DAYS[j]} · ${SH[c]}</strong><ul>
+  <li>Marked available, no leave that day</li><li>${n} shifts this week, under the cap of 5</li>
+  <li>${c==="N"?"At least 16 hours of rest since the previous shift":"Not on the night shift before"}</li>
+  <li>${n>=3?"Among the busiest, so no more shifts this week":"Among the least busy, so first in line for load balancing"}</li></ul>`;
+}
+function dynBoard(){
+  const D=[["Sun","01.11"],["Mon","02.11"],["Tue","03.11"],["Wed","04.11"],["Thu","05.11"],["Fri","06.11"],["Sat","07.11"]];
+  const S=[
+   {k:"m",name:"Morning",time:"07:00–15:00",ic:"☀",
+    post:[["Ethan","Liam"],["Liam","!Owen"],["Liam","Adam","Noah"],["Liam","Owen"],["Mia","Ethan","Liam"],["Ruby","Adam"],["Mia","Lily"]],
+    brk:[["Ella","Ben","Sofia","Nora"],["Ella","Ben","Nora","Lily"],["Ella","Ben","Sofia","Nora"],["Ella","Ben","Sofia","Nora"],["Ella","Ben","Sofia","Nora"],null,null],
+    res:["Lily","Adam","Sam","Leo","Sam","Max","Liam"]},
+   {k:"e",name:"Evening",time:"15:00–22:00",ic:"◐",
+    post:[["Liam","Adam","Leo"],["Ethan","Max","Noah"],["Ethan","Owen","Max"],["Ruby","Ethan","Zoe"],["Ruby","!Ava","Max"],["Mia","Lily"],["Sam","Noah"]],
+    res:["Owen","Leo","Leo","Ava","Owen","Ava","Zoe"]},
+   {k:"n",name:"Night",time:"22:00–07:00",ic:"☾",
+    post:[["Sam","Lily","Ava"],["Zoe","Lily","Max"],["Mia","Ben","Ava"],["Leo","Adam","Max"],["Leo","Zoe","Noah"],["Sam","Noah"],["Ruby","Owen"]],
+    res:["Ben","Ruby","Zoe","Mia","Adam","Ethan","Max"]}
+  ];
+  const chip=n=>n.startsWith("!")?`<div class="chip flag">${n.slice(1)}</div>`:`<div class="chip">${n}</div>`;
+  let h=`<div></div><div></div>`+D.map(d=>`<div class="dh"><b>${d[0]}</b><small>${d[1]}</small></div>`).join("");
+  for(const s of S){
+    h+=`<div class="band b-${s.k}"><span>${s.ic}</span><b>${s.name}</b><small>${s.time}</small></div>
+    <div class="lbl"><span class="t t-post">Post</span>${s.brk?`<span class="t t-brk" style="margin-top:62px">Break</span><small>08:00–16:00<br>08:30–17:30</small>`:""}<span class="t t-res">Reserve</span></div>`;
+    h+=D.map((d,j)=>{const we=j>=5;let c=`<div class="cell c-${s.k}${we?" we":""}"><span class="ed">✎ Edit</span>${s.post[j].map(chip).join("")}<div class="chip add">${we&&s.k!=="m"?"+ Third":"+ Add"}</div>`;
+      if(s.brk){c+=`<div class="gap"></div>`+(s.brk[j]?s.brk[j].map(n=>`<div class="chip brk">${n}</div>`).join("")+`<div class="chip add">+ Add</div>`:`<div class="nobrk">No break on weekends</div>`)}
+      return c+`<div class="chip res">${s.res[j]}</div></div>`}).join("");
+  }
+  return `<div class="shot"><div class="shot-bar"><i></i><i></i><i></i><span>Shabatzak · Weekly board · 01.11–07.11</span></div>
+   <div class="dboard">${h}</div>
+   <div class="shot-foot"><span>⇄ One-for-one swap</span><span>Published board · complete</span></div></div>
+   <p class="shot-cap">The live weekly board, translated, with made-up names. Red marks a seat the system flagged for the manager.</p>`;
+}
+const SUB={"Sun":{m:"a",e:"p",n:"a"},"Mon":{m:"c",e:"a",n:"a"},"Tue":"leave"};
+function submission(){
+  const SHIFTS=[["m","Morning","07:00–15:00"],["e","Evening","15:00–22:00"],["n","Night","22:00–07:00"]];
+  const OPT=[["a","Available"],["c","Can't"],["p","Prefers"]];
+  const DATES={Sun:"01.11",Mon:"02.11",Tue:"03.11"};
+  const days=Object.keys(SUB).map(d=>`<div class="day"><h5>${d}<small>${DATES[d]}</small></h5>${SUB[d]==="leave"?`<div class="leave">On leave · Tue 03.11<br><small style="font-weight:500">Approved leave blocks every shift</small></div>`:
+    SHIFTS.map(s=>`<div class="sh">${s[1]} <small style="color:var(--muted);font-weight:500">${s[2]}</small><div class="tiles">${OPT.map(o=>`<button class="tile${SUB[d][s[0]]===o[0]?" on":""}" data-sub="${d}|${s[0]}|${o[0]}">${o[1]}</button>`).join("")}</div>${SUB[d][s[0]]==="c"?`<div class="reason"><span>Reason: Medical ▾</span><span>Note: clinic at 09:00</span></div>`:""}</div>`).join("")}</div>`).join("");
+  return `<div class="shot"><div class="shot-bar" style="min-width:760px"><i></i><i></i><i></i><span>Shabatzak · My availability</span></div>
+   <div class="sub-top"><div><b>Week of 01.11 – 07.11</b><br><small>Submit by Thursday 29.10, 20:00</small></div><span class="badge badge-orange">Draft · not submitted</span></div>
+   <div class="sub-grid">${days}</div>
+   <div class="sub-foot"><span>Showing 3 of 7 days · tap to change an answer</span><b>Submit availability</b></div></div>
+   <p class="shot-cap">What a soldier sees: one answer per shift. "Can't" asks for a reason and goes to the manager for approval.</p>`;
+}
+function gemachShots(){
+  const top=t=>`<div class="g-top"><b>Gemach</b><span>${t}</span></div>`;
+  const tabs=a=>`<div class="g-tabs">${["Dashboard","Inventory","Reservations","Calendar"].map(x=>`<span class="${x===a?"on":""}">${x}</span>`).join("")}</div>`;
+  const dash=`<div class="phone">${top("Dashboard")}${tabs("Dashboard")}<div class="g-body">
+    <div class="g-range">Thu 12.11 → Sun 15.11</div>
+    <div class="g-stats">${[["Items in stock","412"],["Reserved","96"],["Reservations","7"],["Low stock","3"]].map(s=>`<div class="g-card"><small>${s[0]}</small><b>${s[1]}</b></div>`).join("")}</div>
+    <div class="g-card"><b class="h">Stock for these dates</b><div class="g-bar"><span style="width:77%;background:#0b6b57">Free 316</span><span style="width:23%;background:#1d4ed8">96</span></div><div class="g-leg"><i style="background:#0b6b57"></i>Available<i style="background:#1d4ed8"></i>Reserved</div></div>
+    <div class="g-card"><b class="h">Upcoming</b>${[["Cohen family · Bar mitzvah","Thu 12.11","38 items"],["Levi wedding","Fri 13.11","54 items"],["Community kiddush","Sat 14.11","4 items"]].map(r=>`<div class="g-row"><div><b>${r[0]}</b><small>${r[1]}</small></div><span>${r[2]}</span></div>`).join("")}</div>
+  </div></div>`;
+  const inv=`<div class="phone">${top("Inventory")}${tabs("Inventory")}<div class="g-body">
+    <div class="g-actions"><span class="g-btn">+ New item</span><span class="g-btn sec">Import from Excel</span></div>
+    <div class="g-search">Search items…</div>
+    ${[["Round table","Furniture","20","#c9b79c"],["Tablecloth","Textiles · White, Ivory, Gold","64","#e9e4da"],["Chafing dish","Serving","6","#a9b2bd"],["Folding chair","Furniture","120","#8a9aa8"],["Water urn","Serving","4","#b9a58a"]].map(r=>`<div class="g-item"><i style="background:${r[3]}"></i><div><b>${r[0]}</b><small>${r[1]}</small></div><span>${r[2]}</span></div>`).join("")}
+    <div class="g-card hist"><b class="h">Stock history · Tablecloth</b><small>+20 · Purchase · 02.11 · Dana</small><small>−2 · Damaged · 28.10 · Yossi</small></div>
+  </div></div>`;
+  const res=`<div class="phone">${top("New reservation")}${tabs("Reservations")}<div class="g-body">
+    <div class="g-card"><small>Borrower</small><b>Cohen family</b><small>052-000-0000</small></div>
+    <div class="g-dates"><div class="g-card"><small>Pickup</small><b>Thu 12.11</b></div><div class="g-card"><small>Return</small><b>Sun 15.11</b></div></div>
+    ${[["Round table","8","10 free","ok"],["Tablecloth · White","8","22 free","ok"],["Chafing dish","4","2 free","bad"]].map(r=>`<div class="g-line ${r[3]}"><div><b>${r[0]}</b><small>${r[2]} for these dates</small></div><span>× ${r[1]}</span></div>`).join("")}
+    <div class="g-alert"><b>Chafing dish: only 2 free</b><small>Another reservation holds 4 for Fri 13.11. Lower the quantity or change dates.</small></div>
+    <div class="g-btn full dis">Save reservation</div>
+  </div></div>`;
+  return `<div class="phones">${dash}${inv}${res}</div><p class="shot-cap">Screens recreated from the app, translated, with made-up names. The app is mobile-first, so these are phone views.</p>`;
+}
+function requests(){
+  const R=[["Noah","Leave","Thu 05.11 – Sat 07.11","Approved","ok"],["Ava ⇄ Max","One-for-one swap","Thu 05.11 · Evening","Rules checked","ok"],["Owen","Can't","Mon 02.11 · Morning","Awaiting you",""],["Ethan","Swap request","Sat 07.11 · Night","Awaiting you",""]];
+  return `<div class="shot"><div class="shot-bar" style="min-width:640px"><i></i><i></i><i></i><span>Shabatzak · Requests</span></div>
+   <div class="req-list">${R.map(r=>`<div class="req"><b>${r[0]}</b><div>${r[1]}<br><small>${r[2]}</small></div><span class="badge ${r[4]?"badge-green":"badge-orange"}">${r[3]}</span><div class="acts">${r[4]?`<span class="ok">✓ Done</span>`:`<span>Decline</span><span class="ok">Approve</span>`}</div></div>`).join("")}</div></div>
+   <p class="shot-cap">Leave, swaps and "can't" requests in one queue. Each is checked against the rules before the manager approves.</p>`;
+}
+const stat=s=>`<div class="card stat-card"><div class="stat-top">${s[0]}<span class="stat-dot"></span></div><strong>${s[1]}</strong><small>${s[2]}</small></div>`;
+const title=(h,p)=>`<div class="section-title"><div><h2>${h}</h2><p>${p}</p></div></div>`;
+
+function nav(){
+  document.getElementById("nav").innerHTML=`<button class="${view==="overview"?"active":""}" data-v="overview">${IC.grid}Overview</button>`+
+   ORDER.map(k=>`<button class="${view===k?"active":""}" data-v="${k}">${IC[P[k].icon]}${P[k].nav}</button>`).join("");
+}
+function overview(){
+  const areas=[["Operations",3,"#3159d9"],["Product decisions",3,"#718ee9"],["Automation",3,"#9eabc5"],["AI",1,"#c8ced8"]];
+  return `<header class="page-header"><div><div class="eyebrow">Portfolio</div><h1>Projects Overview</h1>
+   <p>Products I built to replace manual processes. Each one started with how people actually worked.</p></div><div class="date-chip">3 projects · In use</div></header>
+  <section class="kpi-grid">${[["Projects","3","Built and in use"],["Users","Dozens","Soldiers, team, community"],["Weekly effort","~1 hr","Scheduling, down from ~2 days"],["Manual processes","3","Replaced end to end"]].map(stat).join("")}</section>
+  <div class="overview-grid">
+   <section class="card pain-card">${title("Projects","Open a project to walk through how it works")}
+    <div class="pain-list">${ORDER.map((k,i)=>`<div class="pain-row ${i===0?"pain-primary":""}"><span class="rank">#${i+1}</span>
+     <div class="pain-copy"><div><h3>${P[k].nav}</h3><span class="badge badge-blue">${P[k].tag}</span></div><p>${P[k].problem}</p></div>
+     <div><button class="button button-primary" data-v="${k}">Explore →</button><span class="review-label">Case study</span></div></div>`).join("")}</div></section>
+   <div class="distribution-column">
+    <section class="card">${title("What the projects cover","Projects touching each area")}
+     <div class="bar-list">${areas.map((a,i)=>`<div class="bar-row ${i===0?"hi":""}"><div class="bar-label">${a[0]} · ${a[1]}</div><div class="bar-track"><span style="width:${a[1]/3*100}%"></span></div></div>`).join("")}</div></section>
+    <section class="card">${title("How I work","The same path in every project")}
+     <div class="pattern-list">${["Map the manual process","Turn the rules into the product","Keep a person on the final call","Ship, watch, refine"].map((t,i)=>`<div><span>${i+1}</span><p>${t}</p></div>`).join("")}</div></section>
+   </div></div>`;
+}
+function project(k){
+  const p=P[k],next=ORDER[(ORDER.indexOf(k)+1)%ORDER.length];
+  return `<header class="page-header"><div><button class="back-link" data-v="overview">← Back to Overview</button><div class="eyebrow">Case study · ${p.tag}</div><h1>${p.title}</h1><p>${p.sub}</p></div></header>
+  <div class="trace-strip">${p.trace.map((t,i)=>`${i?"<i>→</i>":""}${t}`).join("")}</div>
+  ${p.shots?`<section class="card" style="margin-bottom:18px">${title("Inside the Product","Screens recreated from the live system, translated, with made-up names")}<div class="shots">${p.shots==="gemach"?gemachShots():dynBoard()+submission()+requests()}</div></section>`:""}
+  ${p.confidential?`<section class="why-callout" style="margin:0 0 18px"><span class="callout-icon">🔒</span><div><strong>Screens kept private</strong><p>${p.confidential}</p></div></section>`:""}
+  <section class="card ai-summary"><div class="ai-title"><span class="ai-mark">PM</span><div><h2>The Problem</h2><p>What it looked like before</p></div></div><blockquote>${p.problem}</blockquote></section>
+  <section class="kpi-grid">${p.kpis.map(stat).join("")}</section>
+  ${p.moved?`<section class="card ai-summary"><div class="ai-title"><span class="ai-mark">✓</span><div><h2>Where It Stands</h2><p>How the work runs today</p></div></div><blockquote>${p.moved}</blockquote></section>`:""}
+  <div class="insight-grid">
+   ${p.shots||p.confidential?`<section class="card">${title("How It Works","The weekly cycle, start to finish")}
+    <div class="pattern-list">${p.steps.map((s,i)=>`<div><span>${i+1}</span><p><b>${s[0]}</b> · ${s[1]}</p></div>`).join("")}</div></section>`
+   :`<section class="card">${title("How It Works","Click a step. Names and data are examples.")}
+    <div class="steps">${p.steps.map((s,i)=>`<button class="step${i===step?" on":""}" data-s="${i}"><span>${i+1}</span><div><b>${s[0]}</b><small>${s[1]}</small></div></button>`).join("")}</div>
+    <div class="stage" id="stage">${p.steps[step][2]()}</div></section>`}
+   <section class="card">${title("What I Built","The parts of the product")}
+    <div class="pattern-list">${p.built.map(b=>`<div><span>✓</span><p>${b}</p></div>`).join("")}</div></section>
+  </div>
+  <section class="card">${title("Key Decisions","What I decided and why")}
+   <div class="evidence-preview">${p.decisions.map(d=>`<div class="quote-card"><div class="quote-meta"><span>${d[0]}</span><span class="badge badge-blue">Decision</span></div><h4>${d[1]}</h4><p>${d[2]}</p></div>`).join("")}</div></section>
+  <div class="decision-footer"><p>Want the full story behind ${p.nav}? I'm happy to walk you through it.</p>
+   <div><button class="button button-secondary" data-copy>Copy my email</button><button class="button button-primary" data-v="${next}">Next: ${P[next].nav} →</button></div></div>`;
+}
+function render(){nav();document.getElementById("main").innerHTML=view==="overview"?overview():project(view)}
+function toast(t){const el=document.getElementById("toast");el.innerHTML=`<div class="toast"><span>✓</span><div><strong>${t}</strong><p>avichai.ouliel@gmail.com</p></div></div>`;clearTimeout(toast.t);toast.t=setTimeout(()=>el.innerHTML="",2600)}
+document.addEventListener("click",e=>{
+  const v=e.target.closest("[data-v]");if(v){view=v.dataset.v;step=view==="shabatzak"?2:0;sel=null;render();window.scrollTo({top:0});return}
+  const s=e.target.closest("[data-s]");if(s){step=+s.dataset.s;sel=null;render();return}
+  const c=e.target.closest("td.slot");if(c){sel=[+c.dataset.i,+c.dataset.j];document.getElementById("stage").innerHTML=board();return}
+  const t=e.target.closest("[data-sub]");if(t){const [d,s,o]=t.dataset.sub.split("|");SUB[d][s]=o;const y=window.scrollY;render();window.scrollTo({top:y});return}
+  if(e.target.closest("[data-copy]")){const ok=()=>toast("Email copied"),no=()=>toast("Copy the email from the sidebar");try{navigator.clipboard.writeText("avichai.ouliel@gmail.com").then(ok,no)}catch(_){no()}}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.matches("td.slot"))e.target.click()});
+render();
+</script>
+
+</body>
+</html>
