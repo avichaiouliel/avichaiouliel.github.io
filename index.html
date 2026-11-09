@@ -254,6 +254,24 @@ td.sel{box-shadow:inset 0 0 0 2px var(--blue)}
 @media (prefers-reduced-motion:no-preference){.toast{animation:in .22s ease-out}}
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.scale-note{margin:0 0 18px;color:var(--muted);font-size:11px;font-weight:600}
+.plat{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:1100px){.plat{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.plat{grid-template-columns:1fr}}
+.plat-i{display:flex;gap:11px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:9px;background:#fbfcfd}
+.plat-i>span{width:30px;height:30px;flex:0 0 auto;display:grid;place-items:center;border-radius:8px;background:var(--blue-soft);color:var(--blue);font-size:10px;font-weight:800;letter-spacing:.02em}
+.plat-i:nth-child(odd)>span{background:#fff4e4;color:#b8741a}
+.plat-i b{font-size:13px}
+.plat-i p{margin:4px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.tl::before{content:"";position:absolute;left:6px;right:6px;top:6px;height:2px;background:var(--line)}
+@media (max-width:800px){.tl{grid-template-columns:1fr 1fr;row-gap:18px}.tl::before{display:none}}
+.tl-i{position:relative;padding:22px 14px 0 0;display:flex;flex-direction:column;gap:3px}
+.tl-i i{position:absolute;top:0;left:0;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #9eabc5}
+.tl-i.now i{border-color:var(--blue);box-shadow:0 0 0 4px var(--blue-soft)}
+.tl-i small{color:var(--blue);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.tl-i b{font-size:13px}
+.tl-i p{margin:0;color:var(--muted);font-size:11px;line-height:1.5}
 </style>
 
 </head>
@@ -319,15 +337,28 @@ const P={
  },
  zaqi:{
   logo:ZAQI_LOGO,
+  scale:[["Screens","85","Built from scratch"],["API endpoints","140+","Behind the product"],["Automated tests","1,300+","Run on every change"],["Database migrations","190+","As the product grew"]],
+  scaleNote:"Since July 2026 · 218 commits · 47 pull requests · ~270k lines of TypeScript",
+  platform:[
+   ["AI","AI agent","Answers business questions with tools and skills it can call"],
+   ["KB","Knowledge library","Files and data the agent reads, organized and reusable"],
+   ["PL","Prompt lab","Versioned prompts, test runs, review and side-by-side comparison"],
+   ["WA","WhatsApp channel","The same agent, where customers already talk"],
+   ["ME","Customer app","A personal space for each customer, built mobile-first"],
+   ["AD","Advisor workspace","Customers, leads and requests in one place"],
+   ["BR","Live browser","A sandboxed browser the agent drives and the advisor watches"],
+   ["SC","Security and limits","Access by role, enforced in the database, with usage caps and monitoring"]
+  ],
+  timeline:[["Jul","Prompt testing and extraction","Where it started: one file, one prompt, one review"],["Aug–Sep","Knowledge library and analysis","The agent gets data to work from"],["Oct","AI advisor and customer app","From internal tool to a product for customers"],["Nov","WhatsApp, live browser, security","New channels, new abilities, ready for scale"]],
   nav:"ZAQi",icon:"spark",tag:"AI agent",
   title:"ZAQi",
-  sub:"A large AI product I have been building end to end: an agent that analyzes business data and turns it into answers people can act on. I shaped the product, built the agent, set up the knowledge it works from, and kept refining how it thinks.",
+  sub:"A full AI platform I have been building end to end since July: an agent that analyzes business data and turns it into answers, a customer app, an advisor workspace and a WhatsApp channel. I own the product, the agent, the knowledge it works from and the prompts that shape how it thinks.",
   trace:["File library","Prompts","AI agent","Analysis"],
   problem:"The answers a business needs are often buried in files and data nobody has time to go through. ZAQi lets people ask in plain language and get an analysis grounded in their own data.",
   confidential:"ZAQi is an active, commercially sensitive project, so screenshots and implementation details stay private. I'm glad to walk through the product, the decisions behind it and what I learned in a conversation.",
-  kpis:[["Built","AI agent","Analyzes business data"],["Set up","File library","The agent's knowledge"],["Wrote","Prompts","Created and refined"],["Role","End to end","Product to rollout"]],
+  kpis:[],
   steps:[["Collect the knowledge","A library of the files the agent works from"],["Shape the thinking","Prompts written, tested and refined"],["Analyze","The agent reads the data and answers"],["Improve","Each round of feedback sharpens the next version"]],
-  built:["AI agent that analyzes data","File library for its sources","Prompts, created and refined over many versions"],
+  built:["The AI agent and the tools it uses","The knowledge library it reads from","Prompts, written and refined over many versions","The customer app and the advisor workspace","The WhatsApp channel and the live browser"],
   decisions:[
    ["Grounding","Answers come from a curated library","The agent works from sources the team chose, not from guesses."],
    ["Quality","Prompts evolve through testing","Each change was checked on real questions before it replaced the last one."],
@@ -474,9 +505,12 @@ function project(k){
   return `<header class="page-header"><div><button class="back-link" data-v="overview">← Back to Overview</button><div class="eyebrow">Case study · ${p.tag}</div>${p.logo?`<h1 style="margin:10px 0 8px"><span class="sr">${p.title}</span>${p.logo}</h1>`:`<h1>${p.title}</h1>`}<p>${p.sub}</p></div></header>
   <div class="trace-strip">${p.trace.map((t,i)=>`${i?"<i>→</i>":""}${t}`).join("")}</div>
   ${p.shots?`<section class="card" style="margin-bottom:18px">${title("Inside the Product","Screens recreated from the live system, translated, with made-up names")}<div class="shots">${p.shots==="gemach"?gemachShots():dynBoard()+submission()+requests()}</div></section>`:""}
+  ${p.scale?`<section class="kpi-grid" style="margin-bottom:8px">${p.scale.map(stat).join("")}</section><p class="scale-note">${p.scaleNote}</p>`:""}
+  ${p.platform?`<section class="card" style="margin-bottom:18px">${title("The Platform","Everything ZAQi does today, built in about four months")}<div class="plat">${p.platform.map(x=>`<div class="plat-i"><span>${x[0]}</span><div><b>${x[1]}</b><p>${x[2]}</p></div></div>`).join("")}</div></section>`:""}
+  ${p.timeline?`<section class="card" style="margin-bottom:18px">${title("How It Grew","From an internal test tool to a customer-facing product")}<div class="tl">${p.timeline.map((x,i)=>`<div class="tl-i${i===p.timeline.length-1?" now":""}"><i></i><small>${x[0]} 2026</small><b>${x[1]}</b><p>${x[2]}</p></div>`).join("")}</div></section>`:""}
   ${p.confidential?`<section class="why-callout" style="margin:0 0 18px"><span class="callout-icon">🔒</span><div><strong>Screens kept private</strong><p>${p.confidential}</p></div></section>`:""}
   <section class="card ai-summary"><div class="ai-title"><span class="ai-mark">PM</span><div><h2>The Problem</h2><p>What it looked like before</p></div></div><blockquote>${p.problem}</blockquote></section>
-  <section class="kpi-grid">${p.kpis.map(stat).join("")}</section>
+  ${p.kpis.length?`<section class="kpi-grid">${p.kpis.map(stat).join("")}</section>`:""}
   ${p.moved?`<section class="card ai-summary"><div class="ai-title"><span class="ai-mark">✓</span><div><h2>Where It Stands</h2><p>How the work runs today</p></div></div><blockquote>${p.moved}</blockquote></section>`:""}
   <div class="insight-grid">
    ${p.shots||p.confidential?`<section class="card">${title("How It Works",p.shots===true?"The weekly cycle, start to finish":"From start to finish")}
