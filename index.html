@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Avichai Ouliel, Product & Operations. Case studies: Shabatzak shift scheduling, the Zaqi AI agent, and an Event Gemach inventory app.">
+<meta name="description" content="Avichai Ouliel, Product & Operations. Case studies: Shabatzak shift scheduling, the ZAQi AI agent, and an Event Gemach inventory app.">
 <meta property="og:title" content="Avichai Ouliel · Portfolio">
 <meta property="og:description" content="Products I built to replace manual processes.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%234468e8'/%3E%3Ctext x='32' y='41' font-family='Arial' font-size='26' font-weight='700' fill='white' text-anchor='middle'%3EAO%3C/text%3E%3C/svg%3E">
@@ -253,6 +253,7 @@ td.sel{box-shadow:inset 0 0 0 2px var(--blue)}
 .shot-cap{margin:10px 2px 0;color:var(--muted);font-size:11px}
 @media (prefers-reduced-motion:no-preference){.toast{animation:in .22s ease-out}}
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 
 </head>
@@ -274,10 +275,11 @@ td.sel{box-shadow:inset 0 0 0 2px var(--blue)}
 const IC={
   grid:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
   cal:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
-  spark:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>',
+  spark:'<svg class="icon" style="border-radius:5px" xmlns="http://www.w3.org/2000/svg" viewBox="0.0 0.0 100.0 100.0"><rect x="0" y="0" width="100.0" height="100.0" rx="22.0" fill="#2458e6"/><rect x="43.0" y="46.0" width="14.0" height="34.0" rx="7.0" fill="#ffffff"/><path d="M50.0 16.8 L53.3 26.7 L63.2 30.0 L53.3 33.3 L50.0 43.2 L46.7 33.3 L36.8 30.0 L46.7 26.7 Z" fill="#f5a623"/></svg>',_old:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>',
   box:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/></svg>'
 };
 
+const ZAQI_LOGO=`<svg aria-hidden="true" style="height:56px;width:auto;display:block" xmlns="http://www.w3.org/2000/svg" viewBox="-40.0 -912.5 2443.0 1017.5"><path d="M62.375 0.0Q51.5625 0.0 43.9375 -7.71875Q36.3125 -15.4375 36.3125 -26.25V-147.0Q36.3125 -161.1875 41.90625 -169.875Q47.5 -178.5625 51.3125 -182.5625L352.6875 -523.8125H72.1875Q61.375 -523.8125 53.75 -531.4375Q46.125 -539.0625 46.125 -549.875V-673.75Q46.125 -684.75 53.75 -692.375Q61.375 -700.0 72.1875 -700.0H598.25Q609.25 -700.0 616.875 -692.375Q624.5 -684.75 624.5 -673.75V-554.625Q624.5 -544.0625 620.90625 -535.65625Q617.3125 -527.25 611.5 -521.0625L322.6875 -177.8125H610.6875Q621.6875 -177.8125 629.3125 -170.1875Q636.9375 -162.5625 636.9375 -151.5625V-26.0625Q636.9375 -15.25 629.3125 -7.625Q621.6875 0.0 610.6875 0.0Z" fill="#f5a623"/><path d="M673.125 0.0Q664.3125 0.0 657.90625 -6.40625Q651.5 -12.8125 651.5 -21.625Q651.5 -25.8125 652.6875 -29.375L881.3125 -669.4375Q884.5 -680.25 894.65625 -690.125Q904.8125 -700.0 923.3125 -700.0H1106.0Q1124.5 -700.0 1134.65625 -690.125Q1144.8125 -680.25 1148.0 -669.4375L1376.625 -29.375Q1377.8125 -25.8125 1377.8125 -21.625Q1377.8125 -12.8125 1371.40625 -6.40625Q1365.0 0 1356.1875 0.0H1202.125Q1184.8125 0.0 1176.96875 -7.9375Q1169.125 -15.875 1166.3125 -23.125L1135.1875 -106.75H894.125L863.0 -23.125Q860.375 -15.875 852.84375 -7.9375Q845.3125 0.0 827.1875 0.0ZM940.0625 -276.4375H1089.25L1014.25 -501.4375Z" fill="#f5a623"/><path d="M1864.1875 65.0Q1846.6875 65.0 1837.875 56.5Q1829.0625 48.0 1824.0625 42.0L1793.0625 2.125Q1759.875 10.0 1719.6875 10.0Q1624.5 10.0 1553.90625 -19.90625Q1483.3125 -49.8125 1442.96875 -110.5Q1402.625 -171.1875 1398.8125 -261.125Q1397.8125 -302.875 1397.8125 -347.5625Q1397.8125 -392.25 1398.8125 -435.625Q1402.625 -524.5625 1442.9375 -585.65625Q1483.25 -646.75 1554.34375 -678.375Q1625.4375 -710.0 1719.6875 -710.0Q1813.9375 -710.0 1885.03125 -678.375Q1956.125 -646.75 1996.9375 -585.65625Q2037.75 -524.5625 2040.5625 -435.625Q2042.5625 -392.25 2042.5625 -347.5625Q2042.5625 -302.875 2040.5625 -261.125Q2034.75 -142.5 1968.375 -74.6875L2044.5625 34.0Q2045.5625 35.0 2046.5625 37.90625Q2047.5625 40.8125 2047.5625 43.375Q2049.1875 52.1875 2042.78125 58.59375Q2036.375 65.0 2027.5625 65.0ZM1719.6875 -159.6875Q1762.625 -159.6875 1789.28125 -185.28125Q1815.9375 -210.875 1817.5 -266.9375Q1819.5 -310.3125 1819.5 -350.8125Q1819.5 -391.3125 1817.5 -433.0625Q1816.3125 -470.4375 1803.625 -494.25Q1790.9375 -518.0625 1769.59375 -529.1875Q1748.25 -540.3125 1719.6875 -540.3125Q1692.125 -540.3125 1670.375 -529.1875Q1648.625 -518.0625 1635.9375 -494.25Q1623.25 -470.4375 1621.875 -433.0625Q1620.875 -391.3125 1620.875 -350.8125Q1620.875 -310.3125 1621.875 -266.9375Q1624.25 -210.875 1650.59375 -185.28125Q1676.9375 -159.6875 1719.6875 -159.6875Z" fill="#2458e6"/><path d="M2136.8125 0.0Q2126.0 0 2118.375 -7.625Q2110.75 -15.25 2110.75 -26.0625V-493.9375Q2110.75 -504.75 2118.375 -512.375Q2126.0 -520 2136.8125 -520.0H2285.4375Q2296.25 -520.0 2303.875 -512.375Q2311.5 -504.75 2311.5 -493.9375V-26.0625Q2311.5 -15.25 2303.875 -7.625Q2296.25 0.0 2285.4375 0.0Z" fill="#2458e6"/><path d="M2211.1 -872.5 L2248.6 -760.0 L2361.1 -722.5 L2248.6 -685.0 L2211.1 -572.5 L2173.6 -685.0 L2061.1 -722.5 L2173.6 -760.0 Z" fill="#f5a623"/></svg>`;
 const P={
  shabatzak:{
   nav:"Shabatzak",icon:"cal",tag:"Scheduling",
@@ -316,12 +318,13 @@ const P={
   ]
  },
  zaqi:{
-  nav:"Zaqi",icon:"spark",tag:"AI agent",
-  title:"Zaqi",
+  logo:ZAQI_LOGO,
+  nav:"ZAQi",icon:"spark",tag:"AI agent",
+  title:"ZAQi",
   sub:"A large AI product I have been building end to end: an agent that analyzes business data and turns it into answers people can act on. I shaped the product, built the agent, set up the knowledge it works from, and kept refining how it thinks.",
   trace:["File library","Prompts","AI agent","Analysis"],
-  problem:"The answers a business needs are often buried in files and data nobody has time to go through. Zaqi lets people ask in plain language and get an analysis grounded in their own data.",
-  confidential:"Zaqi is an active, commercially sensitive project, so screenshots and implementation details stay private. I'm glad to walk through the product, the decisions behind it and what I learned in a conversation.",
+  problem:"The answers a business needs are often buried in files and data nobody has time to go through. ZAQi lets people ask in plain language and get an analysis grounded in their own data.",
+  confidential:"ZAQi is an active, commercially sensitive project, so screenshots and implementation details stay private. I'm glad to walk through the product, the decisions behind it and what I learned in a conversation.",
   kpis:[["Built","AI agent","Analyzes business data"],["Set up","File library","The agent's knowledge"],["Wrote","Prompts","Created and refined"],["Role","End to end","Product to rollout"]],
   steps:[["Collect the knowledge","A library of the files the agent works from"],["Shape the thinking","Prompts written, tested and refined"],["Analyze","The agent reads the data and answers"],["Improve","Each round of feedback sharpens the next version"]],
   built:["AI agent that analyzes data","File library for its sources","Prompts, created and refined over many versions"],
@@ -468,7 +471,7 @@ function overview(){
 }
 function project(k){
   const p=P[k],next=ORDER[(ORDER.indexOf(k)+1)%ORDER.length];
-  return `<header class="page-header"><div><button class="back-link" data-v="overview">← Back to Overview</button><div class="eyebrow">Case study · ${p.tag}</div><h1>${p.title}</h1><p>${p.sub}</p></div></header>
+  return `<header class="page-header"><div><button class="back-link" data-v="overview">← Back to Overview</button><div class="eyebrow">Case study · ${p.tag}</div>${p.logo?`<h1 style="margin:10px 0 8px"><span class="sr">${p.title}</span>${p.logo}</h1>`:`<h1>${p.title}</h1>`}<p>${p.sub}</p></div></header>
   <div class="trace-strip">${p.trace.map((t,i)=>`${i?"<i>→</i>":""}${t}`).join("")}</div>
   ${p.shots?`<section class="card" style="margin-bottom:18px">${title("Inside the Product","Screens recreated from the live system, translated, with made-up names")}<div class="shots">${p.shots==="gemach"?gemachShots():dynBoard()+submission()+requests()}</div></section>`:""}
   ${p.confidential?`<section class="why-callout" style="margin:0 0 18px"><span class="callout-icon">🔒</span><div><strong>Screens kept private</strong><p>${p.confidential}</p></div></section>`:""}
@@ -476,7 +479,7 @@ function project(k){
   <section class="kpi-grid">${p.kpis.map(stat).join("")}</section>
   ${p.moved?`<section class="card ai-summary"><div class="ai-title"><span class="ai-mark">✓</span><div><h2>Where It Stands</h2><p>How the work runs today</p></div></div><blockquote>${p.moved}</blockquote></section>`:""}
   <div class="insight-grid">
-   ${p.shots||p.confidential?`<section class="card">${title("How It Works","The weekly cycle, start to finish")}
+   ${p.shots||p.confidential?`<section class="card">${title("How It Works",p.shots===true?"The weekly cycle, start to finish":"From start to finish")}
     <div class="pattern-list">${p.steps.map((s,i)=>`<div><span>${i+1}</span><p><b>${s[0]}</b> · ${s[1]}</p></div>`).join("")}</div></section>`
    :`<section class="card">${title("How It Works","Click a step. Names and data are examples.")}
     <div class="steps">${p.steps.map((s,i)=>`<button class="step${i===step?" on":""}" data-s="${i}"><span>${i+1}</span><div><b>${s[0]}</b><small>${s[1]}</small></div></button>`).join("")}</div>
